@@ -1,18 +1,35 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    static DataManager instance;
+
+    public string PlayerName = "";
+
+    public static DataManager Instance
     {
-        
+        get
+        {
+            if (instance == null)
+            {
+                var obj = new GameObject("DataManager");
+                instance = obj.AddComponent<DataManager>();
+                DontDestroyOnLoad(obj);
+            }
+            return instance;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(instance);
+        }
     }
 }
