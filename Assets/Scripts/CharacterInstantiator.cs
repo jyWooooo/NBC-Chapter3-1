@@ -6,6 +6,8 @@ using UnityEngine;
 public class CharacterInstantiator : MonoBehaviour
 {
     static CharacterInstantiator instance;
+    [SerializeField] CharacterChanger characterChanger;
+    public GameObject player;
 
     public static CharacterInstantiator Instance
     {
@@ -30,6 +32,19 @@ public class CharacterInstantiator : MonoBehaviour
 
     void Start()
     {
-        Instantiate(DataManager.Instance.characterPrefabs[DataManager.Instance.SelectCharacterIndex], Vector3.zero, Quaternion.identity);
+        if (player == null)
+            CreateCharacter(DataManager.Instance.SelectCharacterIndex);
+        characterChanger.OnSelected += CreateCharacter;
+    }
+
+    public void CreateCharacter(int selectedIndex)
+    {
+        Vector2 position = Vector2.zero;
+        if (player != null)
+        {
+            position = player.transform.position;
+            Destroy(player);
+        }
+        player = Instantiate(DataManager.Instance.characterPrefabs[selectedIndex], position, Quaternion.identity);
     }
 }

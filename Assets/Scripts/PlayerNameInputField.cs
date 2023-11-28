@@ -11,19 +11,18 @@ public class PlayerNameInputField : MonoBehaviour
     public int MinLength = 2;
     public int MaxLength = 10;
     [HideInInspector] public bool canCreateName = false;
-    [HideInInspector] public string currentInput;
     TMP_InputField _text;
     
-    void Start()
+    protected virtual void Start()
     {
-        currentInput = DataManager.Instance.PlayerName ?? "";
         _text = GetComponent<TMP_InputField>();
-        _text.text = currentInput;
+        _text.text = DataManager.Instance.PlayerName ?? "";
     }
 
     public void SetName(string name)
     {
-        DataManager.Instance.PlayerName = name;
+        if (canCreateName)
+            DataManager.Instance.PlayerName = name;
     }
 
     public void SetMessage(string name)

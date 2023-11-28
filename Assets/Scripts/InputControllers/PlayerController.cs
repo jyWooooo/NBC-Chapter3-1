@@ -29,7 +29,17 @@ public class PlayerController : MonoBehaviour, PlayerInputAction.IPlayerControlA
         inputAction ??= new();
 
         // IPlayerControlActions를 상속받아 구현했으므로 this로 Callback을 설정할 수 있다.
-        inputAction.PlayerControl.SetCallbacks(this);
-        inputAction.Enable();
+        inputAction?.PlayerControl.SetCallbacks(this);
+        inputAction?.Enable();
+    }
+
+    private void OnDisable()
+    {
+        inputAction?.Disable();
+    }
+
+    private void OnDestroy()
+    {
+        inputAction?.Dispose();
     }
 }

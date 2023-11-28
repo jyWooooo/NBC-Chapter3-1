@@ -3,15 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ChangeCharacterButton : MonoBehaviour
+public class StartSceneChangeCharacterButton : ChangeCharacterButton
 {
-    [SerializeField] CharacterChanger characterChanger;
-    Button button;
-
-    void Start()
+    protected override void Start()
     {
-        button = GetComponent<Button>();
-        button.onClick.AddListener(() => { characterChanger.gameObject.SetActive(true); });
+        base.Start();
         characterChanger.OnSelected += SetImage;
         SetImage(DataManager.Instance.SelectCharacterIndex);
     }

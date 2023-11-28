@@ -12,6 +12,6 @@ public class JoinButton : MonoBehaviour
         if ((nameField?.canCreateName ?? false) && (DataManager.Instance != null))
             SceneManager.LoadScene("MainScene");
         else
-            nameField?.SetMessage(nameField?.currentInput);
+            nameField?.SetMessage("");
     }
 }

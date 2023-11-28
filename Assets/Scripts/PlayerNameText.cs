@@ -12,11 +12,16 @@ public class PlayerNameText : MonoBehaviour
 
     void Start()
     {
-        nameText.text = DataManager.Instance.PlayerName;
+        LoadName();
         InvokeRepeating(nameof(SetBoundingBox), 0.1f, 1f);
     }
     void SetBoundingBox()
     {
         boundingBox.localScale = (Vector2)nameText.bounds.size + boundingBoxMagin;
+    }
+
+    public void LoadName()
+    {
+        nameText.text = DataManager.Instance.PlayerName;
     }
 }
