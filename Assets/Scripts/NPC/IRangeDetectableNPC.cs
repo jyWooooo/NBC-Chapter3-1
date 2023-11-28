@@ -3,11 +3,11 @@ using UnityEngine;
 
 public interface IRangeDetectableNPC
 {
-    public event Action<Collider2D> OnTriggerEntered;
-    public event Action<Collider2D> OnTriggerExited;
-    public event Action<Collider2D> OnTriggerStayed;
+    public event Action<Collider2D> OnRangeEntered;
+    public event Action<Collider2D> OnRangeExited;
+    public event Action<Collider2D> OnRangeStayed;
 
-    public void OnTriggerEnter2D(Collider2D col);
-    public void OnTriggerExit2D(Collider2D col);
-    public void OnTriggerStay2D(Collider2D col);
+    public void OnRangeEnter(Collider2D col);
+    public void OnRangeExit(Collider2D col);
+    public void OnRangeStay(Collider2D col);
 }

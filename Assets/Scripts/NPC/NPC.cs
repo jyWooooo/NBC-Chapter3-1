@@ -4,5 +4,11 @@ using UnityEngine;
 
 public class NPC : MonoBehaviour
 {
-    public string Name;
+    public string npcName;
+    [SerializeField] NameText nameText;
+
+    protected virtual void Start()
+    {
+        nameText.SetName(npcName);
+    }
 }
