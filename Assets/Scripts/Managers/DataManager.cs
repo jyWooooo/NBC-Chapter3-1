@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -8,7 +9,9 @@ public class DataManager : MonoBehaviour
 {
     static DataManager instance;
 
-    public string PlayerName = "";
+    public string PlayerName;
+    public List<GameObject> characterPrefabs;
+    public int SelectCharacterIndex;
 
     public static DataManager Instance
     {
@@ -16,9 +19,9 @@ public class DataManager : MonoBehaviour
         {
             if (instance == null)
             {
-                var obj = new GameObject("DataManager");
+                var obj = new GameObject(nameof(DataManager));
                 instance = obj.AddComponent<DataManager>();
-                DontDestroyOnLoad(obj);
+                instance.Initialize();
             }
             return instance;
         }
@@ -29,7 +32,22 @@ public class DataManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(instance);
+            instance.Initialize();
         }
+    }
+
+    public void Initialize()
+    {
+        PlayerName = "";
+        characterPrefabs = new List<GameObject>();
+        LoadCharacterPrefabs();
+        SelectCharacterIndex = 0;
+        DontDestroyOnLoad(gameObject);
+    }
+
+    public bool LoadCharacterPrefabs()
+    {
+        characterPrefabs = Resources.LoadAll<GameObject>("Characters").ToList();
+        return characterPrefabs.Count > 0;
     }
 }
