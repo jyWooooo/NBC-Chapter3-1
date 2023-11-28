@@ -3,21 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class PlayerNameText : MonoBehaviour
+public class PlayerNameText : NameText
 {
-    [SerializeField] TextMeshPro nameText;
-    [SerializeField] Transform boundingBox;
-
-    public Vector2 boundingBoxMagin = new(0.1f, 0.1f);
-
-    void Start()
+    protected override void Start()
     {
         LoadName();
         InvokeRepeating(nameof(SetBoundingBox), 0.1f, 1f);
-    }
-    void SetBoundingBox()
-    {
-        boundingBox.localScale = (Vector2)nameText.bounds.size + boundingBoxMagin;
     }
 
     public void LoadName()
