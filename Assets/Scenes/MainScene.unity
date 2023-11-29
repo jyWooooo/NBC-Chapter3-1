@@ -3638,7 +3638,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 1087237866}
   boundingBox: {fileID: 366926876}
-  boundingBoxMagin: {x: 0.1, y: 0.1}
+  boundingBoxMagin: {x: 0.2, y: 0.2}
 --- !u!114 &1704548126
 MonoBehaviour:
   m_ObjectHideFlags: 0

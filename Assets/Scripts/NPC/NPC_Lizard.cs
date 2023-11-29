@@ -18,17 +18,12 @@ public class NPC_Lizard : NPC, IRangeDetectableNPC, IConversableNPC
         @"...",
     };
 
-    public event Action<Collider2D> OnRangeEntered;
-    public event Action<Collider2D> OnRangeExited;
-    public event Action<Collider2D> OnRangeStayed;
     public event Action<string> OnConversationEntered;
     public event Action<string> OnConversationLeaved;
 
     protected override void Start()
     {
         base.Start();
-        OnRangeEntered += OnConversationEnter;
-        OnRangeExited += OnConversationLeave;
         OnConversationEntered += Speech;
         OnConversationLeaved += Speech;
     }
@@ -39,38 +34,15 @@ public class NPC_Lizard : NPC, IRangeDetectableNPC, IConversableNPC
         speechBubble.Enable(script);
     }
 
-    public void OnConversationEnter(string script)
-    {
-        OnConversationEntered?.Invoke(script);
-    }
-    public void OnConversationEnter(Collider2D col)
-    {
-        OnConversationEnter(RandomScriptInList(RangeDetectEnteredScripts));
-    }
+    public void OnConversationEnter(string script) => OnConversationEntered?.Invoke(script);
 
-    public void OnConversationLeave(string script)
-    {
-        OnConversationEntered?.Invoke(script);
-    }
-    public void OnConversationLeave(Collider2D col)
-    {
-        OnConversationLeave(RandomScriptInList(RangeDetectExitedScripts));
-    }
+    public void OnConversationLeave(string script) => OnConversationEntered?.Invoke(script);
 
-    public void OnRangeEnter(Collider2D col)
-    {
-        OnRangeEntered?.Invoke(col);
-    }
+    public void OnRangeEnter(Collider2D col) => OnConversationEnter(RandomScriptInList(RangeDetectEnteredScripts));
 
-    public void OnRangeExit(Collider2D col)
-    {
-        OnRangeExited?.Invoke(col);
-    }
+    public void OnRangeExit(Collider2D col) => OnConversationLeave(RandomScriptInList(RangeDetectExitedScripts));
 
-    public void OnRangeStay(Collider2D col)
-    {
-        //OnTriggerStayed?.Invoke(col);
-    }
+    public void OnRangeStay(Collider2D col) { }
 
     string RandomScriptInList(List<string> scripts)
     {

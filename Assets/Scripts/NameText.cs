@@ -8,7 +8,7 @@ public class NameText : MonoBehaviour
     [SerializeField] protected TextMeshPro nameText;
     [SerializeField] protected Transform boundingBox;
 
-    public Vector2 boundingBoxMagin = new(0.1f, 0.1f);
+    public Vector2 boundingBoxMagin = new(0.2f, 0.2f);
 
     protected virtual void Start()
     {
