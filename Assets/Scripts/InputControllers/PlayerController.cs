@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour, PlayerInputAction.IPlayerControlA
 
     public event Action<Vector2> OnMoved;
     public event Action<Vector2> OnLooked;
+    public event Action OnFired;
 
     public virtual void OnMove(InputAction.CallbackContext context)
     {
@@ -20,6 +21,12 @@ public class PlayerController : MonoBehaviour, PlayerInputAction.IPlayerControlA
         // convert world position
         var pos = Camera.main.ScreenToWorldPoint(context.ReadValue<Vector2>());
         OnLooked?.Invoke(pos);
+    }
+
+    public void OnFire(InputAction.CallbackContext context)
+    {
+        if (context.ReadValueAsButton())
+            OnFired?.Invoke();
     }
 
     protected virtual void Start()
